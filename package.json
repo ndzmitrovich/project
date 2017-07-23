@@ -1,0 +1,22 @@
+{
+  "name": "home-accounting-project",
+  "version": "1.0.0",
+  "description": "Home accounting project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "firebase serve",
+    "build": "gulp dev:build"
+  },
+  "author": "Nastassia Dzmitrovich",
+  "license": "ISC",
+  "devDependencies": {
+    "font-awesome": "^4.7.0",
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "pump": "^1.0.2",
+    "requirejs": "^2.3.3"
+  }
+}

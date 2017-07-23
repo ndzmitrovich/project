@@ -1,0 +1,79 @@
+<!--основная часть после авторизации-->
+<% if (user) {%>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <caption class="table-caption">Текущие расходы</caption>
+        <thead>
+        <tr class="success">
+            <th colspan="3">Всего потрачено</th>
+            <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#</td>
+            <td>Обязательные платежи</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Продукты</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Одежда</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Бытовая химия и косметика</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Транспорт</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Образование</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Лекарства</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Отдых и развлечения</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>Непредвиденные расходы</td>
+            <td>Сумма</td>
+            <td>Детали</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!--основная часть до авторизации-->
+<% } else {%>
+
+    <h1>Авторизуйтесь, чтобы продолжить работу</h1>
+
+<% } %>
+

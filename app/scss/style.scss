@@ -1,0 +1,10 @@
+$icon-font-path: '../fonts/';
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+/* FONT-AWESOME
+========================================================================== */
+@import "../../node_modules/font-awesome/scss/font-awesome";
+@import "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css";
+/* Module styles
+========================================================================== */
+@import "partials/base";

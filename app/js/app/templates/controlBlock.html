@@ -1,0 +1,25 @@
+<% if (user) {%>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <div>
+            <label class="table-caption">Текущий месяц</label>
+
+            <div class="input-group date month-calendar" ></div>
+            <input type="hidden" id="monthValue"  >
+
+        </div>
+    </div>
+</div>
+
+<!-- Кнопка Добавить, вызывающее модальное окно -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <div>
+            <a href="#myModal_add" class="btn btn-info add-charge" data-toggle="modal">Добавить</a>
+        </div>
+    </div>
+</div>
+
+<% } %>
+
