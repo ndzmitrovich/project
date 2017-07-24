@@ -5,57 +5,38 @@ html {
 }
 
 body {
-  padding: 0;
-  margin: 0;
-  margin-top: 100px;
-  background: darkcyan;
+  background: gainsboro;
   font-size: 16px;
 }
 
-/*стиль навигации*/
-div.navbar-collapse {
-  padding-top: 0;
-  margin-top: 0;
-}
-/*иконка*/
-i {
-  padding: 0 10px;
-}
-
-/*стиль названия приложения*/
-.programs-name {
-  min-height: 100px;
-  line-height: 100px;
-  background: #269abc;
-}
-
 .auth {
-  height: 100px;
-  line-height: 100px;
-  background: #b9def0;
-  text-align: center;
+  margin-bottom: 0;
 }
 
-.mainText {
-  height: 200px;
-  line-height: 200px;
-  background: #31b0d5;
+//стиль имени пользователя в навигации
+.name-user {
+  padding-left: 6px;
+  color: #337ab7;
 }
-
-.buttonStyle{
-  height: 100px;
-  line-height: 100px;
-  background: #b9def0;
-}
-
-
 
 /*стиль для основного блока*/
 .div-margin {
-  margin-right: 25%;
-  margin-left: 25%;
   background: white;
   text-align: center;
+  margin-top: 0;
+}
+
+//стиль для текста до авторизации
+.change-color-h1 {
+  color: dimgrey;
+  transition: all 0.3s ease;
+}
+
+.change-color-h1:hover {
+  color: #337ab7;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /*общий стиль для кнопок*/
@@ -72,6 +53,12 @@ i {
   text-align: right;
 }
 
+.buttonStyle {
+  height: 100px;
+  line-height: 100px;
+  background: #b9def0;
+}
+
 .left {
   text-align: left;
 }
@@ -79,40 +66,82 @@ i {
 /*стиль подвала*/
 .footer {
   height: 100px;
-  background: #269abc;
+  background: black;
 }
 
 /*стиль текста подвала*/
 #footerText {
   text-align: center;
-  font-size: 20px;
+  color: dimgrey;
+  line-height: 100px;
+}
+
+#footerText:hover {
   color: white;
-  padding: 30px;
 }
 
 .center {
   text-align: center;
 }
 
-.row {
-  margin-bottom: 0;
-  margin-top: 0;
+//стиль списков
+ul {
+  list-style-type: none;
 }
 
-
-ul { list-style-type: none; }
-ol { list-style-type: none; }
-
-.nav>li>a {
-  padding: 0px;
-  margin: 0px;
-  height: auto;
+ol {
+  list-style-type: none;
 }
 
+//стили таблицы
 .table-caption {
   text-align: center;
-  font-size: large;
+  color: #337ab7;
+  text-transform: uppercase;
 }
-th:last-child {
-  text-align: right;
+
+th, td {
+  text-align: left;
+}
+
+.month-calendar {
+  text-align: -webkit-center;
+}
+
+//классы для иконок
+td > i.category {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  //font-size: 2em;
+}
+.main_charges:before {
+  content: "\f015";
+}
+.food_charges:before {
+  content: "\f291";
+}
+.clothes_charges:before {
+  content: "\f290";
+}
+.cosmetics_charges:before {
+  content: "\f006";
+}
+.transport_charge:before {
+  content: "\f207";
+}
+.education_charge:before {
+  content: "\f19d";
+}
+.medicine_charge:before {
+  content: "\f0fa";
+}
+.pleasure_charge:before {
+  content: "\f072";
+}
+.different_charge:before {
+  content: "\f06b";
 }

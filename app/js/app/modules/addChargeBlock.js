@@ -1,5 +1,5 @@
-define(['underscore', 'radio', 'fb', 'text!templates/addChargeBlock.html'],
-    function (_, radio, fb, addChargeTemplate) {
+define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/addChargeBlock.html'],
+    function (_, radio, fb, $, addChargeTemplate) {
         return {
             init: function () {
                 this.template = _.template(addChargeTemplate);
@@ -61,8 +61,8 @@ define(['underscore', 'radio', 'fb', 'text!templates/addChargeBlock.html'],
                 fb.saveCharge({
                     categoryName: $("#chargeType").val(),
                     value: parseFloat($("#chargeValue").val()),
-                    date: $("#chargeСalendar").val()
-                });
+                    date: $("#chargeСalendar").val(),
+                 });
 
             }
 

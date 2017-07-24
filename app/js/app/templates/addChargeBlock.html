@@ -15,16 +15,16 @@
                     <div class="form-group">
                         <label for="chargeType">Виды расходов</label>
                         <select type="text" class="form-control" id="chargeType" placeholder="Charge type">
-                            <% categories.forEach(function(category) { %>
-                            <option> <%= category.name %></option>
-                            <% }); %>
+                            <% for(var i=0; i < categories.length; i++){%>
+                            <option> <%= categories[i].name %></option>
+                            <% } %>
 
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="chargeСalendar">Календарь</label>
                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                            <input type="text" class="form-control datepicker" id="chargeСalendar">
+                            <input type="text" class="form-control datepicker" id="chargeСalendar" placeholder="Выберите дату">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -32,14 +32,14 @@
                     </div>
                     <div class="form-group">
                         <label for="chargeValue">Сумма</label>
-                        <input type="text" class="form-control" id="chargeValue" placeholder="Charge value">
+                        <input type="text" class="form-control" id="chargeValue" placeholder="Введите сумму">
                     </div>
                 </form>
             </div>
 
             <!-- Футер модального окна -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary save-charge" data-dismiss="modal">
+                <button type="button" class="btn btn-info save-charge" data-dismiss="modal">
                     Сохранить
                 </button>
             </div>

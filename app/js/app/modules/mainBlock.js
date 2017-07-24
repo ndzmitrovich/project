@@ -13,39 +13,99 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
 
             setupVariables: function () {
                 this.charges = [];
-                this.categories = [];
+                this.categories = {};
+                this.date = new Date();
             },
 
             setupEvents: function () {
                 radio.on('auth/changed', this.changeAuth.bind(this));
                 radio.on('db/loadUserCharges', this.addUserCharges.bind(this));
+                radio.on('ui/currentMonthChanged', this.updateCurrentMonth.bind(this));
+                radio.on('db/loadCategories', this.addCategories.bind(this));
                 this.el.addEventListener('click', this.clickHandler.bind(this));
 
             },
 
             render: function () {
                 var user = arguments[1] || fb.getCurrentUser();
-
+                var categoryObjects = this.getActiveCategoryObjects();
                 this.el.innerHTML = this.template({
                     user: user,
-                    charges: this.charges,
-                    categories: this.categories
-
+                    categoryObjects: categoryObjects,
+                    totalSum: this.getTotalSum(categoryObjects)
                 });
 
             },
 
+            addCategories: function (newCategories) {
+                this.categories = {};
+                for (var i = 0; i < newCategories.length; i++) {
+                    this.categories[newCategories[i].name] = newCategories[i];
+                }
+                this.render();
+            },
+
+            getTotalSum: function(categoryObjects){
+                var sum = 0;
+                for(var i=0; i < categoryObjects.length;i++){
+                    sum += categoryObjects[i].sum;
+                }
+                return sum;
+            },
+
+            getActiveCategoryObjects: function () {
+                var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+                var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+                var categoryObjects = [];
+                var categorySums = this.getCategorySumsForDatePeriod(this.charges, firstDay, lastDay);
+                var categoryNames = Object.keys(categorySums);
+
+                for (var i = 0; i < categoryNames.length; i++) {
+                    var categoryName = categoryNames[i];
+                    var categoryDescription = this.categories[categoryName];
+                    var categoryObject = {
+                        name: categoryName,
+                        code: categoryDescription != null ? categoryDescription.code : "",
+                        sum: categorySums[categoryName]
+                    };
+                    categoryObjects.push(categoryObject);
+                }
+
+                return categoryObjects;
+            },
+
+            getCategorySumsForDatePeriod: function (allcharges, firstDay, lastDay) {
+                var categorySums = {};
+                for (var i = 0; i < allcharges.length; i++) {
+                    var charge = allcharges[i];
+                    var chargeDate = new Date(Date.parse(charge.date));
+                    if (chargeDate >= firstDay && chargeDate <= lastDay) {
+                        if (!categorySums[charge.categoryName]) {
+                            categorySums[charge.categoryName] = 0;
+                        }
+                        categorySums[charge.categoryName] = categorySums[charge.categoryName] + charge.value;
+                    }
+                }
+
+                return categorySums;
+            },
+
             changeAuth: function (user) {
-                this.render(this.tasks, user);
+                this.render();
             },
 
             addUserCharges: function (charges) {
                 this.charges = charges;
+                this.render();
             },
 
             clickHandler: function (e) {
 
-            }
+            },
+            updateCurrentMonth: function (date) {
+                this.date = date;
+                this.render();
+            },
 
         };
     });

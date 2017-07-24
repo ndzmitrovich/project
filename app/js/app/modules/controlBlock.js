@@ -1,5 +1,5 @@
-define(['underscore', 'radio', 'fb', 'text!templates/controlBlock.html'],
-    function (_, radio, fb, controlTemplate) {
+define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/controlBlock.html'],
+    function (_, radio, fb, $, controlTemplate) {
         return {
             init: function () {
                 this.template = _.template(controlTemplate);
@@ -33,11 +33,8 @@ define(['underscore', 'radio', 'fb', 'text!templates/controlBlock.html'],
                     startView: "months",
                     minViewMode: "months"
                 });
-                $(".month-calendar").on('changeDate', function () {
-                    $('.monthValue').val(
-                        $('#month-calendar').datepicker('getFormattedDate')
-                    );
-                    radio.trigger('ui/currentMonthChanged', $('#month-calendar').datepicker('getDate'));
+                $(".month-calendar").on('changeDate', function (e) {
+                    radio.trigger('ui/currentMonthChanged', $('.month-calendar').datepicker('getDate'));
                 });
 
             },

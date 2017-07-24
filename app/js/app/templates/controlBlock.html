@@ -2,24 +2,30 @@
 
 <div class="row">
     <div class="col-xs-12 col-sm-12">
-        <div>
-            <label class="table-caption">Текущий месяц</label>
-
-            <div class="input-group date month-calendar" ></div>
-            <input type="hidden" id="monthValue"  >
-
-        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <caption class="table-caption">Текущий месяц</caption>
+               </table>
+            <div class="date month-calendar"></div>
+          </div>
     </div>
 </div>
 
 <!-- Кнопка Добавить, вызывающее модальное окно -->
 <div class="row">
     <div class="col-xs-12 col-sm-12">
-        <div>
-            <a href="#myModal_add" class="btn btn-info add-charge" data-toggle="modal">Добавить</a>
+        <div style="padding: 10px">
+            <a href="#myModal_add" class="btn btn-info btn-large add-charge" data-toggle="modal">Добавить</a>
         </div>
     </div>
 </div>
 
+<!--основная часть до авторизации-->
+<% } else {%>
+<figure class="image">
+    <img src="images/girl_auth.jpg">
+</figure>
+
 <% } %>
+
 
