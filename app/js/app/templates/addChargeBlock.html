@@ -14,16 +14,19 @@
                 <form>
                     <div class="form-group">
                         <label for="chargeType">Виды расходов</label>
-                        <select type="text" class="form-control" id="chargeType" placeholder="Charge type">
+                        <select type="text" class="form-control" id="chargeType">
                             <% for(var i=0; i < categories.length; i++){%>
-                            <option> <%= categories[i].name %></option>
+                            <option value="<%= categories[i].code %>"> <%= categories[i].name %></option>
                             <% } %>
-
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="chargeСomment">Комментарий</label>
+                        <input type="text" class="form-control" id="chargeСomment" placeholder="Введите комментарий">
+                    </div>
+                    <div class="form-group">
                         <label for="chargeСalendar">Календарь</label>
-                        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-language="ru">
                             <input type="text" class="form-control datepicker" id="chargeСalendar" placeholder="Выберите дату">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>

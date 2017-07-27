@@ -22,7 +22,7 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/controlBlock.html
             },
 
             render: function () {
-                var user = arguments[1] || fb.getCurrentUser();
+                var user = fb.getCurrentUser();
 
                 this.el.innerHTML = this.template({
                     user: user,
@@ -31,11 +31,11 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/controlBlock.html
                 $(".month-calendar").datepicker({
                     format: "mm-yyyy",
                     startView: "months",
-                    minViewMode: "months"
+                    minViewMode: "months",
+                    language: "ru"
                 });
-                $(".month-calendar").on('changeDate', function (e) {
-                    radio.trigger('ui/currentMonthChanged', $('.month-calendar').datepicker('getDate'));
-                });
+
+               $(".month-calendar").on('changeDate', this.datePickerHandler.bind(this));
 
             },
 
@@ -56,6 +56,10 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/controlBlock.html
                 }
 
             },
+
+            datePickerHandler: function (e) {
+                radio.trigger('ui/currentMonthChanged', $(e.target).datepicker('getDate'));
+            }
 
         };
     });

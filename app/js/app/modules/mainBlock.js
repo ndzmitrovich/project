@@ -27,7 +27,7 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
             },
 
             render: function () {
-                var user = arguments[1] || fb.getCurrentUser();
+                var user = fb.getCurrentUser();
                 var categoryObjects = this.getActiveCategoryObjects();
                 this.el.innerHTML = this.template({
                     user: user,
@@ -40,7 +40,7 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
             addCategories: function (newCategories) {
                 this.categories = {};
                 for (var i = 0; i < newCategories.length; i++) {
-                    this.categories[newCategories[i].name] = newCategories[i];
+                    this.categories[newCategories[i].code] = newCategories[i];
                 }
                 this.render();
             },
@@ -58,15 +58,15 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
                 var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
                 var categoryObjects = [];
                 var categorySums = this.getCategorySumsForDatePeriod(this.charges, firstDay, lastDay);
-                var categoryNames = Object.keys(categorySums);
+                var categoryCodes = Object.keys(categorySums);
 
-                for (var i = 0; i < categoryNames.length; i++) {
-                    var categoryName = categoryNames[i];
-                    var categoryDescription = this.categories[categoryName];
+                for (var i = 0; i < categoryCodes.length; i++) {
+                    var categoryCode = categoryCodes[i];
+                    var categoryDescription = this.categories[categoryCode];
                     var categoryObject = {
-                        name: categoryName,
-                        code: categoryDescription != null ? categoryDescription.code : "",
-                        sum: categorySums[categoryName]
+                        name: categoryDescription != null ? categoryDescription.name : "",
+                        code: categoryCode,
+                        sum: categorySums[categoryCode]
                     };
                     categoryObjects.push(categoryObject);
                 }
@@ -80,10 +80,10 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
                     var charge = allcharges[i];
                     var chargeDate = new Date(Date.parse(charge.date));
                     if (chargeDate >= firstDay && chargeDate <= lastDay) {
-                        if (!categorySums[charge.categoryName]) {
-                            categorySums[charge.categoryName] = 0;
+                        if (!categorySums[charge.categoryCode]) {
+                            categorySums[charge.categoryCode] = 0;
                         }
-                        categorySums[charge.categoryName] = categorySums[charge.categoryName] + charge.value;
+                        categorySums[charge.categoryCode] = categorySums[charge.categoryCode] + charge.value;
                     }
                 }
 
@@ -100,12 +100,12 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
             },
 
             clickHandler: function (e) {
-
             },
+
             updateCurrentMonth: function (date) {
                 this.date = date;
                 this.render();
-            },
+            }
 
         };
     });

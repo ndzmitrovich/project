@@ -25,11 +25,10 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/addChargeBlock.ht
             },
 
             render: function () {
-                var user = arguments[1] || fb.getCurrentUser();
+                var user =  fb.getCurrentUser();
 
                 this.el.innerHTML = this.template({
                     user: user,
-                    charges: this.charges,
                     categories: this.categories
 
                 });
@@ -59,9 +58,10 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/addChargeBlock.ht
             saveChargeInDb: function () {
 
                 fb.saveCharge({
-                    categoryName: $("#chargeType").val(),
+                    categoryCode: $("#chargeType").val(),
+                    comment: $("#chargeСomment").val(),
                     value: parseFloat($("#chargeValue").val()),
-                    date: $("#chargeСalendar").val(),
+                    date: $("#chargeСalendar").val()
                  });
 
             }

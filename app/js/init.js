@@ -6,7 +6,8 @@ requirejs.config({
         firebase: 'https://www.gstatic.com/firebasejs/4.1.1/firebase',
         jquery: '../lib/jquery.min',
         bootstrap: '../lib/bootstrap.min',
-        datepicker: '../lib/bootstrap-datepicker.min'
+        datepicker: '../lib/bootstrap-datepicker.min',
+        datepicker_ru: '../lib/bootstrap-datepicker.ru.min'
     },
     shim: {
         firebase: {

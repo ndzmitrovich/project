@@ -10,7 +10,7 @@ define(['underscore', 'radio', 'fb', 'text!templates/authorization.html'],
             },
 
             render: function () {
-                var user = arguments[0] || fb.getCurrentUser();
+                var user = fb.getCurrentUser();
                 this.el.innerHTML = this.template({
                     user: user
                 });
@@ -30,8 +30,8 @@ define(['underscore', 'radio', 'fb', 'text!templates/authorization.html'],
                 });
             },
 
-            changeAuth: function (user) {
-                this.render(user);
+            changeAuth: function () {
+                this.render();
             }
         };
     });
