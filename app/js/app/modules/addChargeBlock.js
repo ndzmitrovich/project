@@ -59,7 +59,6 @@ define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/addChargeBlock.ht
 
                 fb.saveCharge({
                     categoryCode: $("#chargeType").val(),
-                    comment: $("#chargeСomment").val(),
                     value: parseFloat($("#chargeValue").val()),
                     date: $("#chargeСalendar").val()
                  });

@@ -39,6 +39,9 @@ define(['module', 'firebase', 'radio'],
 
             signInGoogle: function () {
                 var provider = new firebase.auth.GoogleAuthProvider();
+                provider.setCustomParameters({
+                    'prompt': 'select_account'
+                });
                 firebase.auth().signInWithPopup(provider)
                     .then(function (result) {
                         var user = result.user;

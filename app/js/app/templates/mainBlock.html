@@ -6,8 +6,7 @@
         <thead>
         <tr class="info">
             <th colspan="2">Всего потрачено</th>
-            <th><%= totalSum %></th>
-            <th></th>
+            <th class="center"><%= totalSum %></th>
         </tr>
         </thead>
         <tbody>
@@ -16,8 +15,7 @@
         <tr>
             <td><i class="category <%= categoryObjects[i].code %>"></i></td>
             <td><%= categoryObjects[i].name %></td>
-            <td><%= categoryObjects[i].sum %></td>
-            <td><!--<i class="fa fa-arrow-circle-right">--></i></td>
+            <td class="center"><%= categoryObjects[i].sum %></td>
         </tr>
         <% } %>
         </tbody>
@@ -27,7 +25,7 @@
 <!--основная часть до авторизации-->
 <% } else {%>
 
-<div><h1 class="change-color-h1">Пожалуйста, авторизуйтесь, чтобы продолжить работу</h1></div>
+<div><h1 class="change-color-h1">Пожалуйста, авторизуйтесь,<br> чтобы начать работу</h1></div>
 
 <% } %>
 
