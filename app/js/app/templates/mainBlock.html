@@ -7,15 +7,16 @@
         <tr class="info">
             <th colspan="2">Всего потрачено</th>
             <th class="center"><%= totalSum %></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-
         <% for(var i =0; i < categoryObjects.length; i++) {%>
         <tr>
             <td><i class="category <%= categoryObjects[i].code %>"></i></td>
             <td><%= categoryObjects[i].name %></td>
             <td class="center"><%= categoryObjects[i].sum %></td>
+            <td><a class="category-details" id="<%= categoryObjects[i].code %>" ><i class="fa fa-list" aria-hidden="true"></i></td>
         </tr>
         <% } %>
         </tbody>

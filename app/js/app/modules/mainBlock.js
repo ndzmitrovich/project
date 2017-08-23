@@ -1,8 +1,9 @@
-define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
-    function (_, radio, fb, main) {
+define(['underscore', 'radio', 'fb', 'jquery', 'text!templates/mainBlock.html', 'text!templates/chargesBlock.html'],
+    function (_, radio, fb, $, main, charges) {
         return {
             init: function () {
-                this.template = _.template(main);
+                this.mainTemplate = _.template(main);
+                this.chargesTemplate = _.template(charges);
                 this.el = document.querySelector('.main-block');
 
                 this.setupVariables();
@@ -14,7 +15,9 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
             setupVariables: function () {
                 this.charges = [];
                 this.categories = {};
+                this.categoryCharges = {};
                 this.date = new Date();
+                this.selectedCategory = null;
             },
 
             setupEvents: function () {
@@ -28,12 +31,21 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
 
             render: function () {
                 var user = fb.getCurrentUser();
-                var categoryObjects = this.getActiveCategoryObjects();
-                this.el.innerHTML = this.template({
-                    user: user,
-                    categoryObjects: categoryObjects,
-                    totalSum: this.getTotalSum(categoryObjects)
-                });
+
+                if (this.selectedCategory) {
+                    this.el.innerHTML = this.chargesTemplate({
+                        charges: this.getChargesForActiveCategory(),
+                        category: this.getActiveCategory()
+                    });
+                } else {
+                    var categoryObjects = this.getActiveCategoryObjects();
+                    this.el.innerHTML = this.mainTemplate({
+                        user: user,
+                        categoryObjects: categoryObjects,
+                        totalSum: this.getTotalSum(categoryObjects)
+                    });
+                }
+
 
             },
 
@@ -45,9 +57,9 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
                 this.render();
             },
 
-            getTotalSum: function(categoryObjects){
+            getTotalSum: function (categoryObjects) {
                 var sum = 0;
-                for(var i=0; i < categoryObjects.length;i++){
+                for (var i = 0; i < categoryObjects.length; i++) {
                     sum += categoryObjects[i].sum;
                 }
                 return sum;
@@ -74,36 +86,78 @@ define(['underscore', 'radio', 'fb', 'text!templates/mainBlock.html'],
                 return categoryObjects;
             },
 
-            getCategorySumsForDatePeriod: function (allcharges, firstDay, lastDay) {
-                var categorySums = {};
+            getChargesForActiveCategory: function () {
+                var firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+                var lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+                return this.getChargesForDatePeriod(this.categoryCharges[this.selectedCategory], firstDay, lastDay);
+            },
+
+            getActiveCategory: function () {
+                return this.categories[this.selectedCategory];
+            },
+
+
+            getChargesForDatePeriod: function (allcharges, firstDay, lastDay) {
+                var charges = [];
                 for (var i = 0; i < allcharges.length; i++) {
                     var charge = allcharges[i];
                     var chargeDate = new Date(Date.parse(charge.date));
                     if (chargeDate >= firstDay && chargeDate <= lastDay) {
-                        if (!categorySums[charge.categoryCode]) {
-                            categorySums[charge.categoryCode] = 0;
-                        }
-                        categorySums[charge.categoryCode] = categorySums[charge.categoryCode] + charge.value;
+                        charges.push(charge);
                     }
+                }
+                return charges;
+            },
+
+            getCategorySumsForDatePeriod: function (allcharges, firstDay, lastDay) {
+                var categorySums = {};
+                var actualCharges = this.getChargesForDatePeriod(allcharges, firstDay, lastDay);
+                for (var i = 0; i < actualCharges.length; i++) {
+                    var charge = actualCharges[i];
+
+                    if (!categorySums[charge.categoryCode]) {
+                        categorySums[charge.categoryCode] = 0;
+                    }
+                    categorySums[charge.categoryCode] = categorySums[charge.categoryCode] + charge.value;
+
                 }
 
                 return categorySums;
             },
 
             changeAuth: function (user) {
+                this.setupVariables();
                 this.render();
             },
 
             addUserCharges: function (charges) {
                 this.charges = charges;
+                this.categoryCharges = [];
+                for (var i = 0; i < charges.length; i++) {
+                    if (!this.categoryCharges[charges[i].categoryCode]) {
+                        this.categoryCharges[charges[i].categoryCode] = [];
+                    }
+                    this.categoryCharges[charges[i].categoryCode].push(charges[i]);
+                }
                 this.render();
             },
 
             clickHandler: function (e) {
+
+                if ($(e.target).parents().hasClass('category-details')) {
+                    this.selectedCategory = $(e.target).parents('.category-details')[0].id;
+                    this.render();
+                }
+
+                if (e.target.classList.contains('close-category-detail')) {
+                    this.selectedCategory = null;
+                    this.render();
+                }
             },
 
             updateCurrentMonth: function (date) {
                 this.date = date;
+                this.selectedCategory = null;
                 this.render();
             }
 

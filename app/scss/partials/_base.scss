@@ -118,30 +118,44 @@ td > i.category {
   -moz-osx-font-smoothing: grayscale;
   //font-size: 2em;
 }
+
 .main_charges:before {
   content: "\f015";
 }
+
 .food_charges:before {
   content: "\f291";
 }
+
 .clothes_charges:before {
   content: "\f290";
 }
+
 .cosmetics_charges:before {
   content: "\f006";
 }
+
 .transport_charge:before {
   content: "\f207";
 }
+
 .education_charge:before {
   content: "\f19d";
 }
+
 .medicine_charge:before {
   content: "\f0fa";
 }
+
 .pleasure_charge:before {
   content: "\f072";
 }
+
 .different_charge:before {
   content: "\f06b";
+}
+
+.category-details-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
 }

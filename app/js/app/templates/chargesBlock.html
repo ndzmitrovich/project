@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <div class="category-details-header">
+        <button type="button" class="close close-category-detail">×</button>
+        <h4 class="modal-title"><%= category.name %></h4>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr class="info">
+            <th>Дата</th>
+            <th>Сумма</th>
+            <th>Комментарий</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i =0; i < charges.length; i++) {%>
+        <tr>
+            <td><%= charges[i].date %></td>
+            <td><%= charges[i].value %></td>
+            <td ><%= charges[i].comment %></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+
